@@ -21,7 +21,7 @@ def parse_args():
 
 if __name__ == '__main__':
     args = parse_args()
-
+    import pdb; pdb.set_trace()
     caffe.set_mode_gpu()
     caffe.set_device(args.gpu)
 
