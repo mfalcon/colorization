@@ -11,7 +11,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description='iColor: deep interactive colorization')
     parser.add_argument('-img_in',dest='img_in',help='grayscale image to read in', type=str, default=None)
     parser.add_argument('-img_out',dest='img_out',help='colorized image to save off', type=str, default=None)
-    parser.add_argument('-folder',dest='folder',help='folder to look for images', type=str, default='videos/stills')
+    parser.add_argument('-folder',dest='folder',help='folder to look for images', type=str, default='videos/stills/')
     parser.add_argument('--gpu', dest='gpu', help='gpu id', type=int, default=0)
     parser.add_argument('--prototxt',dest='prototxt',help='prototxt filepath', type=str, default='./models/colorization_deploy_v2.prototxt')
     parser.add_argument('--caffemodel',dest='caffemodel',help='caffemodel filepath', type=str, default='./models/colorization_release_v2.caffemodel')
@@ -21,7 +21,6 @@ def parse_args():
 
 if __name__ == '__main__':
     args = parse_args()
-    import pdb; pdb.set_trace()
     caffe.set_mode_gpu()
     caffe.set_device(args.gpu)
 
@@ -37,6 +36,7 @@ if __name__ == '__main__':
     
     folder_dir = args.folder
     imgs = glob.glob(folder_dir + '*.png')
+    import pdb; pdb.set_trace()
     for img in imgs:
     # load the original image
         img_rgb = caffe.io.load_image(img)
