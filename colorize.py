@@ -20,25 +20,25 @@ def parse_args():
     return args
 
 if __name__ == '__main__':
-	args = parse_args()
+    args = parse_args()
 
-	caffe.set_mode_gpu()
-	caffe.set_device(args.gpu)
+    caffe.set_mode_gpu()
+    caffe.set_device(args.gpu)
 
-	# Select desired model
-	net = caffe.Net(args.prototxt, args.caffemodel, caffe.TEST)
+    # Select desired model
+    net = caffe.Net(args.prototxt, args.caffemodel, caffe.TEST)
 
-	(H_in,W_in) = net.blobs['data_l'].data.shape[2:] # get input shape
-	(H_out,W_out) = net.blobs['class8_ab'].data.shape[2:] # get output shape
+    (H_in,W_in) = net.blobs['data_l'].data.shape[2:] # get input shape
+    (H_out,W_out) = net.blobs['class8_ab'].data.shape[2:] # get output shape
 
-	pts_in_hull = np.load('./resources/pts_in_hull.npy') # load cluster centers
-	net.params['class8_ab'][0].data[:,:,0,0] = pts_in_hull.transpose((1,0)) # populate cluster centers as 1x1 convolution kernel
-	# print 'Annealed-Mean Parameters populated'
+    pts_in_hull = np.load('./resources/pts_in_hull.npy') # load cluster centers
+    net.params['class8_ab'][0].data[:,:,0,0] = pts_in_hull.transpose((1,0)) # populate cluster centers as 1x1 convolution kernel
+    # print 'Annealed-Mean Parameters populated'
     
     folder_dir = args.folder
     imgs = glob.glob(folder_dir + '*.gif')
     for img in imgs:
-	# load the original image
+    # load the original image
         img_rgb = caffe.io.load_image(img)
 
         img_lab = color.rgb2lab(img_rgb) # convert image to lab color space
