@@ -36,7 +36,6 @@ if __name__ == '__main__':
     
     folder_dir = args.folder
     imgs = glob.glob(folder_dir + '*.png')
-    import pdb; pdb.set_trace()
     for img in imgs:
     # load the original image
         img_rgb = caffe.io.load_image(img)
