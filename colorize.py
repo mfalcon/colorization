@@ -35,7 +35,7 @@ if __name__ == '__main__':
     # print 'Annealed-Mean Parameters populated'
     
     folder_dir = args.folder
-    imgs = glob.glob(folder_dir + '*.png')
+    imgs = glob.glob(folder_dir + '*.jpg')
     for img in imgs:
     # load the original image
         img_rgb = caffe.io.load_image(img)
